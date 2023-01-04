@@ -26,6 +26,8 @@ struct Pacman {
 
     bool peutSeDeplacer; // Indique si Pacman peut se déplacer ou non (pour gérer les collisions avec les murs)
 
+    unsigned int disparition = 0;
+
     Point pointBouche1; // Premier point de la bouche de Pacman (pour l'animation)
     Point pointBouche2; // Deuxième point de la bouche de Pacman (pour l'animation)
 

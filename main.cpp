@@ -74,14 +74,15 @@ Jeu chargerLaPartie(unsigned int niveau, Reglages param) {
         partieActuelle.etat = TypeEtat::Parametre;
     }
     else if(niveau == 3) {
+
         Pacman pacman;
 
         pacman.position.x = 100;
-        pacman.position.y = 325;
+        pacman.position.y = 340;
 
         pacman.rayon = 20;
         pacman.vitesse = 5;
-        pacman.vitesseBouche = 7;
+        pacman.vitesseBouche = 9;
 
         pacman.direction = Droite;
 
@@ -101,119 +102,213 @@ Jeu chargerLaPartie(unsigned int niveau, Reglages param) {
         partieActuelle.etat = TypeEtat::EnCours;
 
         partieActuelle.pointsAManger = {
-            {{650, 70}, 5, true, false},
-            {{625, 70}, 5, true, false},
-            {{600, 70}, 5, true, false},
-            {{575, 70}, 5, true, false},
-            {{530, 70}, 10, true, false},
-            {{500, 70}, 5, true, false},
-            {{475, 70}, 5, true, false},
-            {{450, 70}, 5, true, false},
-            {{1100, 200}, 5, true, false},
-            {{97, 635}, 5, true, false},
-
             {{500, 400}, 5, true, true}};
+
+        short xPoint = 40;
+        while (xPoint < 1240) {
+            partieActuelle.pointsAManger.push_back({{xPoint, 627}, 5, true, false});
+            xPoint += 30;
+        }
 
         partieActuelle.score = 0;
         partieActuelle.nbVies = 3;
         partieActuelle.niveau = 1;
         partieActuelle.tempsEcoule = 0;
 
+        // Obstacle:  Haut
+        ajouterMur(Point{60, 60}, Point{280,130}, partieActuelle);
+        ajouterMur(Point{325, 60}, Point{540,130}, partieActuelle);
+
+        ajouterMur(Point{585, 0}, Point{695,130}, partieActuelle);
+
+        ajouterMur(Point{1000, 60}, Point{1215,130}, partieActuelle);
+        ajouterMur(Point{740, 60}, Point{955,130}, partieActuelle);
+
+        // Obstacle:  Haut en dessous
+        ajouterMur(Point{60, 175}, Point{280,200}, partieActuelle); // gauche
+        ajouterMur(Point{1000, 175}, Point{1215,200}, partieActuelle); // droite
+
+        ajouterMur(Point{325, 170}, Point{350,250}, partieActuelle); // centre gauche
+        ajouterMur(Point{930, 170}, Point{955,250}, partieActuelle); // centre droite
+
+        ajouterMur(Point{395, 170}, Point{890,200}, partieActuelle); // centre
+
+        ajouterMur(Point{630, 170}, Point{655,260}, partieActuelle); // centre dessous
+
+        ajouterMur(Point{395, 240}, Point{590,260}, partieActuelle); // centre dessous gauche
+        ajouterMur(Point{695, 240}, Point{890,260}, partieActuelle); // centre dessous droite
+
+
+        ajouterMur(Point{325, 360}, Point{350,440}, partieActuelle); // barre verticale bas gauche
+        ajouterMur(Point{930, 360}, Point{955,440}, partieActuelle); // barre verticale bas droite
+
+        // Bas
+        ajouterMur(Point{630, 500}, Point{655,590}, partieActuelle); // centre dessous
+
+        ajouterMur(Point{395, 540}, Point{590,560}, partieActuelle); // centre dessous gauche
+        ajouterMur(Point{695, 540}, Point{890,560}, partieActuelle); // centre dessous droite
+
+        ajouterMur(Point{195, 480}, Point{390,500}, partieActuelle); // centre dessous gauche
+        ajouterMur(Point{895, 480}, Point{1090,500}, partieActuelle); // centre dessous droite
+
+        ajouterMur(Point{60, 550}, Point{280,600}, partieActuelle);
+
+        // Passerelle
+        ajouterMur(Point{0, 250}, Point{200, 265}, partieActuelle);
+        ajouterMur(Point{185, 250}, Point{200, 320}, partieActuelle);
+        ajouterMur(Point{0, 305}, Point{200, 320}, partieActuelle);
+
+        ajouterMur(Point{0, 360}, Point{200, 375}, partieActuelle);
+        ajouterMur(Point{185, 360}, Point{200, 430}, partieActuelle);
+        ajouterMur(Point{0, 415}, Point{200, 430}, partieActuelle);
+
+        ajouterMur(Point{1080, 250}, Point{1280, 265}, partieActuelle);
+        ajouterMur(Point{1080, 250}, Point{1095, 320}, partieActuelle);
+        ajouterMur(Point{1080, 305}, Point{1280, 320}, partieActuelle);
+
+        ajouterMur(Point{1080, 360}, Point{1280, 375}, partieActuelle);
+        ajouterMur(Point{1080, 360}, Point{1095, 430}, partieActuelle);
+        ajouterMur(Point{1080, 415}, Point{1280, 430}, partieActuelle);
+
+        // Centre
+        // gauche
+        ajouterMur(Point{530, 300}, Point{545, 435}, partieActuelle);
+        // bas
+        ajouterMur(Point{530, 420}, Point{755, 435}, partieActuelle);
+        // droite
+        ajouterMur(Point{740, 300}, Point{755, 435}, partieActuelle);
+
+        //ajouterMur(Point{535, 300}, Point{755, 310}, partieActuelle);
 
         // Cloisons
-        ajouterMur(Point{0, 0}, Point{1280, 50}, partieActuelle);
-        ajouterMur(Point{0, 150}, Point{50, 720}, partieActuelle);
-        ajouterMur(Point{0, 680}, Point{1280, 720}, partieActuelle);
-        ajouterMur(Point{1230, 0}, Point{1280, 720}, partieActuelle);
+        //haut
+        ajouterMur(Point{0, 0}, Point{1280, 20}, partieActuelle);
 
-        ajouterMur(Point{0, 150}, Point{550,95}, partieActuelle);
-        ajouterMur(Point{600, 95}, Point{1000, 250}, partieActuelle);
-        ajouterMur(Point{105, 350}, Point{450, 400}, partieActuelle);
-        ajouterMur(Point{100, 200}, Point{395, 305}, partieActuelle);
+        //gauche
+        ajouterMur(Point{0, 0}, Point{20, 265}, partieActuelle);
+        ajouterMur(Point{0, 420}, Point{20, 670}, partieActuelle);
 
+        //bas
+        ajouterMur(Point{0, 650}, Point{1280, 670}, partieActuelle);
 
-        ajouterMur(Point{1050, 95}, Point{1094, 350}, partieActuelle);
-
-        ajouterMur(Point{1094, 300}, Point{606, 364}, partieActuelle);
-
-        ajouterMur(Point{150, 468}, Point{572, 531}, partieActuelle);
-
-        ajouterMur(Point{1094, 300}, Point{606, 364}, partieActuelle);
-
-        ajouterMur(Point{630, 475}, Point{716, 689}, partieActuelle);
-        ajouterMur(Point{1232, 533}, Point{877, 570}, partieActuelle);
+        // droite
+        ajouterMur(Point{1260, 0}, Point{1280, 670}, partieActuelle);
 
 
-        ajouterMur(Point{1149, 104}, Point{1270, 420}, partieActuelle);
-
-
-        Fantome pinky;
-        pinky.id = 0;
-        pinky.position.x = 1100;
-        pinky.position.y = 100;
-        pinky.direction = Direction::Gauche;
-        pinky.nomTexture1 = "res/fantome1.si2";
-        pinky.nomTexture2 = "res/vulnerable.si2";
-        pinky.vitesse = 3;
-        pinky.rayon = 15;
-        pinky.vivant = true;
-        pinky.vulnerable = false;
-        pinky.possedeTrajectoire = false;
-        partieActuelle.listeFantomes.emplace_back(pinky);
+        //        Fantome pinky;
+        //        pinky.id = 0;
+        //        pinky.position.x = 1100;
+        //        pinky.position.y = 600;
+        //        pinky.direction = Direction::Gauche;
+        //        pinky.nomTexture1 = "res/fantome1.si2";
+        //        pinky.nomTexture2 = "res/vulnerable.si2";
+        //        pinky.vitesse = 3;
+        //        pinky.rayon = 18;
+        //        pinky.vivant = true;
+        //        pinky.vulnerable = false;
+        //        pinky.possedeTrajectoire = false;
+        //        partieActuelle.listeFantomes.emplace_back(pinky);
 
         Fantome blinky;
         blinky.id = 1;
-        blinky.position.x = 300;
-        blinky.position.y = 600;
+        blinky.position.x = 580;
+        blinky.position.y = 400;
         blinky.direction = Direction::Gauche;
         blinky.nomTexture1 = "res/blinky.si2";
         blinky.nomTexture2 = "res/vulnerable.si2";
-        blinky.vitesse = 2;
+        blinky.vitesse = 4;
         blinky.rayon = 15;
         blinky.vivant = true;
         blinky.vulnerable = false;
         blinky.possedeTrajectoire = false;
         partieActuelle.listeFantomes.emplace_back(blinky);
 
-        Fantome punky;
-        punky.id = 2;
-        punky.position.x = 500;
-        punky.position.y = 100;
-        punky.direction = Direction::Gauche;
-        punky.nomTexture1 = "res/fantome1.si2";
-        punky.nomTexture2 = "res/vulnerable.si2";
-        punky.vitesse = 2;
-        punky.rayon = 15;
-        punky.vivant = true;
-        punky.vulnerable = false;
-        punky.possedeTrajectoire = false;
-        partieActuelle.listeFantomes.emplace_back(punky);
+        //        Fantome punky;
+        //        punky.id = 2;
+        //        punky.position.x = 500;
+        //        punky.position.y = 100;
+        //        punky.direction = Direction::Gauche;
+        //        punky.nomTexture1 = "res/fantome1.si2";
+        //        punky.nomTexture2 = "res/vulnerable.si2";
+        //        punky.vitesse = 2;
+        //        punky.rayon = 15;
+        //        punky.vivant = true;
+        //        punky.vulnerable = false;
+        //        punky.possedeTrajectoire = false;
+        //        partieActuelle.listeFantomes.emplace_back(punky);
 
-        Fantome zobi;
-        zobi.id = 3;
-        zobi.position.x = 150;
-        zobi.position.y = 600;
-        zobi.direction = Direction::Gauche;
-        zobi.nomTexture1 = "res/blinky.si2";
-        zobi.nomTexture2 = "res/vulnerable.si2";
-        zobi.vitesse = 4;
-        zobi.rayon = 15;
-        zobi.vivant = true;
-        zobi.vulnerable = false;
-        zobi.possedeTrajectoire = false;
-        partieActuelle.listeFantomes.emplace_back(zobi);
+        //        Fantome zobi;
+        //        zobi.id = 3;
+        //        zobi.position.x = 150;
+        //        zobi.position.y = 600;
+        //        zobi.direction = Direction::Gauche;
+        //        zobi.nomTexture1 = "res/blinky.si2";
+        //        zobi.nomTexture2 = "res/vulnerable.si2";
+        //        zobi.vitesse = 4;
+        //        zobi.rayon = 15;
+        //        zobi.vivant = true;
+        //        zobi.vulnerable = false;
+        //        zobi.possedeTrajectoire = false;
+        //        partieActuelle.listeFantomes.emplace_back(zobi);
     }
 
 
     return partieActuelle;
 }
 
+void resetGame(Jeu & partieActuelle) {
+    for(Fantome & fantome : partieActuelle.listeFantomes) {
+        fantome.position.x = 580;
+        fantome.position.y = 400;
+    }
+
+    Pacman & pacman = partieActuelle.pacman;
+
+    pacman.position.x = 100;
+    pacman.position.y = 340;
+    pacman.direction = Droite;
+    pacman.disparition = 0;
+
+    pacman.vivant = true;
+
+    pacman.factorX1 = 2;
+    pacman.factorY1 = 0.5;
+    pacman.factorX2 = 2;
+    pacman.factorY2 = 1.5;
+
+    pacman.pointBouche1.x = pacman.rayon * pacman.factorX1 - pacman.rayon;
+    pacman.pointBouche1.y = pacman.rayon * pacman.factorY1 - pacman.rayon;
+
+    pacman.pointBouche2.x = pacman.rayon * pacman.factorX2 - pacman.rayon;
+    pacman.pointBouche2.y = pacman.rayon * pacman.factorY2 - pacman.rayon;
+
+}
+
+bool touchePacman(Fantome fantome, Pacman pacman) {
+    int dx = fantome.position.x - pacman.position.x;
+    int dy = fantome.position.y - pacman.position.y;
+    int distance = sqrt(dx * dx + dy * dy); // Calcule de la distance entre le fantôme et Pac-Man
+    return distance <= fantome.rayon + pacman.rayon; // Retourne vrai si le fantôme touche Pac-Man
+}
+
+
 int mangePoint(Jeu &partieActuelle) {
     Pacman &pacman = partieActuelle.pacman;
     for(size_t i = 0 ; i < partieActuelle.listeFantomes.size() ; ++i) {
-        if (partieActuelle.listeFantomes[i].vulnerable && distance(pacman.position, partieActuelle.listeFantomes[i].position) <= pacman.rayon + partieActuelle.pointsAManger[i].rayon) {
-            if(partieActuelle.listeFantomes[i].vulnerable) {
-                partieActuelle.listeFantomes[i].vivant= false;
+        Fantome fantome = partieActuelle.listeFantomes[i];
+
+        if(touchePacman(fantome, pacman)) {
+            --partieActuelle.nbVies;
+            pacman.vivant = false;
+
+            if(partieActuelle.nbVies == 0) {
+                partieActuelle.etat = TypeEtat::GameOver;
+            }
+
+        }
+        if (fantome.vulnerable && distance(pacman.position, fantome.position) <= pacman.rayon + partieActuelle.pointsAManger[i].rayon) {
+            if(fantome.vulnerable) {
+                fantome.vivant= false;
 
                 pacman.score += 100;
             }
@@ -276,7 +371,6 @@ void events(MinGL &window, Jeu & partieActuelle)
 
         case nsEvent::EventType_t::MouseClick:
             // Il s'agit d'un click de souris
-            cout << "x: " << actualEvent.eventData.clickData.x << " y: " << actualEvent.eventData.clickData.y << endl;
 
             if(partieActuelle.etat == TypeEtat::Accueil) {
                 if(actualEvent.eventData.clickData.x >= 494 && actualEvent.eventData.clickData.y >= 315 &&
@@ -350,6 +444,7 @@ void events(MinGL &window, Jeu & partieActuelle)
             else if(partieActuelle.etat == TypeEtat::EnCours) {
                 cout << "x: " << actualEvent.eventData.clickData.x << " y: " << actualEvent.eventData.clickData.y << endl;
 
+
             }
             break;
         case nsEvent::EventType_t::MouseDrag:
@@ -378,10 +473,11 @@ void events(MinGL &window, Jeu & partieActuelle)
 }
 
 
-
 void dessiner(MinGL &window, Jeu &partieActuelle)
 {
+    cout << partieActuelle.etat <<endl;
     if(partieActuelle.etat == TypeEtat::Accueil) {
+
         nsGui::Sprite textureFantome("res/jouer.si2", nsGraphics::Vec2D(500, 300));
         window << textureFantome;
 
@@ -397,9 +493,12 @@ void dessiner(MinGL &window, Jeu &partieActuelle)
 
         }
 
+
     }
     else if(partieActuelle.etat == TypeEtat::Chargement) {
+
         window << nsGui::Text(nsGraphics::Vec2D(500, 300), " Loading... ", nsGraphics::KWhite, nsGui::GlutFont::BITMAP_TIMES_ROMAN_24);
+
     }
 
     else if(partieActuelle.etat == TypeEtat::Parametre) {
@@ -468,11 +567,9 @@ void dessiner(MinGL &window, Jeu &partieActuelle)
 
     }
     else if(partieActuelle.etat == TypeEtat::EnCours) {
-
-
         // window << nsShape::Circle(nsGraphics::Vec2D(100, 320), 50, nsGraphics::KYellow);
-        Pacman pacman = partieActuelle.pacman;
-        window << nsShape::Circle(nsGraphics::Vec2D(pacman.position.x, pacman.position.y), 20, nsGraphics::KYellow);
+        Pacman & pacman = partieActuelle.pacman;
+        window << nsShape::Circle(nsGraphics::Vec2D(pacman.position.x, pacman.position.y), 18, nsGraphics::KYellow);
         //    window << nsShape::Circle(nsGraphics::Vec2D(posCircleX, posCircleY), 5, nsGraphics::KRed); // milieu constante
 
         if(debugMode) {
@@ -485,52 +582,84 @@ void dessiner(MinGL &window, Jeu &partieActuelle)
             window << nsShape::Circle(nsGraphics::Vec2D(pacman.position.x+pacman.pointBouche1.x, pacman.position.y+pacman.pointBouche1.y), 5, nsGraphics::KCyan); // 75, 370
             window << nsShape::Circle(nsGraphics::Vec2D(pacman.position.x+pacman.pointBouche2.x, pacman.position.y+pacman.pointBouche2.y), 5, nsGraphics::KCyan); // 125, 370
 
+
             window << nsShape::Triangle(nsGraphics::Vec2D(pacman.position.x+pacman.pointBouche1.x, pacman.position.y+pacman.pointBouche1.y),
                                         nsGraphics::Vec2D(pacman.position.x, pacman.position.y),
                                         nsGraphics::Vec2D(pacman.position.x+pacman.pointBouche2.x, pacman.position.y+pacman.pointBouche2.y),
                                         nsGraphics::KLime);
         } else {
-            window << nsShape::Triangle(nsGraphics::Vec2D(pacman.position.x+pacman.pointBouche1.x, pacman.position.y+pacman.pointBouche1.y),
-                                        nsGraphics::Vec2D(pacman.position.x, pacman.position.y),
-                                        nsGraphics::Vec2D(pacman.position.x+pacman.pointBouche2.x, pacman.position.y+pacman.pointBouche2.y),
-                                        nsGraphics::KBlack);
+
+
+            if(pacman.vivant) {
+                window << nsShape::Triangle(nsGraphics::Vec2D(pacman.position.x+pacman.pointBouche1.x, pacman.position.y+pacman.pointBouche1.y),
+                                            nsGraphics::Vec2D(pacman.position.x, pacman.position.y),
+                                            nsGraphics::Vec2D(pacman.position.x+pacman.pointBouche2.x, pacman.position.y+pacman.pointBouche2.y),
+                                            nsGraphics::KBlack);
+            } else {
+
+                window << nsShape::Circle(nsGraphics::Vec2D(pacman.position.x, pacman.position.y), pacman.disparition, nsGraphics::KBlack);
+
+                if(pacman.disparition <= 20) {
+                    ++pacman.disparition;
+                } else {
+                    resetGame(partieActuelle);
+                }
+
+            }
         }
 
         for(const Mur& mur: partieActuelle.listeObstacles) {
-            window << nsShape::Rectangle (nsGraphics::Vec2D(mur.p1.x, mur.p1.y), nsGraphics::Vec2D(mur.p2.x, mur.p2.y), nsGraphics::KCyan);
+            window << nsShape::Rectangle (nsGraphics::Vec2D(mur.p1.x, mur.p1.y), nsGraphics::Vec2D(mur.p2.x, mur.p2.y), nsGraphics::KBleuCustom);
+
+        }
+
+        for(const Mur& mur: partieActuelle.listeObstacles) {
+            window << nsShape::Rectangle (nsGraphics::Vec2D(mur.p1.x+2, mur.p1.y+2), nsGraphics::Vec2D(mur.p2.x-2, mur.p2.y-2), nsGraphics::KBlack);
+
         }
 
         for(const PointAManger& points : partieActuelle.pointsAManger) {
             if(points.nourriture) continue;
 
             if(points.mangeable) {
-                window << nsShape::Circle(nsGraphics::Vec2D(points.position.x, points.position.y), points.rayon, nsGraphics::KCyan);
+                window << nsShape::Circle(nsGraphics::Vec2D(points.position.x, points.position.y), points.rayon, nsGraphics::Saumon);
             }
         }
 
-        for(const Fantome& fantome: partieActuelle.listeFantomes) {
-            if(fantome.vivant) {
-                if(fantome.vulnerable) {
-                    nsGui::Sprite textureFantome(fantome.nomTexture2, nsGraphics::Vec2D(fantome.position.x-20, fantome.position.y-20));
-                    window << textureFantome;
-                } else {
-                    nsGui::Sprite textureFantome(fantome.nomTexture1, nsGraphics::Vec2D(fantome.position.x-20, fantome.position.y-20));
-                    window << textureFantome;
+        if(pacman.vivant) {
+            for(const Fantome& fantome: partieActuelle.listeFantomes) {
+                if(fantome.vivant) {
+                    if(fantome.vulnerable) {
+                        nsGui::Sprite textureFantome(fantome.nomTexture2, nsGraphics::Vec2D(fantome.position.x-20, fantome.position.y-20));
+                        window << textureFantome;
+                    } else {
+                        // window << nsShape::Circle(nsGraphics::Vec2D(fantome.position.x, fantome.position.y), fantome.rayon, nsGraphics::KPurple);
+
+                        window << nsGui::Sprite (fantome.nomTexture1, nsGraphics::Vec2D(fantome.position.x-20, fantome.position.y-20));
+                    }
                 }
             }
         }
 
-        window << nsGui::Text(nsGraphics::Vec2D(20, 40), "Score: " + to_string(pacman.score), nsGraphics::KBlack, nsGui::GlutFont::BITMAP_9_BY_15);
+        window << nsGui::Text(nsGraphics::Vec2D(20, 40), "Score: " + to_string(pacman.score), nsGraphics::KWhite, nsGui::GlutFont::BITMAP_9_BY_15);
+
+        window << nsGui::Sprite ("res/vie.si2", nsGraphics::Vec2D(10, 690));
+
+        for(unsigned short i (0) ; i < partieActuelle.nbVies ; ++i) {
+            unsigned int positionX = 70+35*i;
+
+            window << nsGui::Sprite ("res/iconevie.si2", nsGraphics::Vec2D(positionX, 685));
+        }
+    } else if(partieActuelle.etat == TypeEtat::GameOver) {
+        if(partieActuelle.nbVies == 0) {  // Partie Perdue
+            window << nsGui::Text(nsGraphics::Vec2D(500, 500), "PERDU", nsGraphics::KWhite, nsGui::GlutFont::BITMAP_HELVETICA_18);
+        } else { // Partie gagnée
+
+        }
     }
 
 }
 
-bool touchePacman(Fantome fantome, Pacman pacman) {
-    int dx = fantome.position.x - pacman.position.x;
-    int dy = fantome.position.y - pacman.position.y;
-    int distance = sqrt(dx * dx + dy * dy); // Calcule de la distance entre le fantôme et Pac-Man
-    return distance <= fantome.rayon + pacman.rayon; // Retourne vrai si le fantôme touche Pac-Man
-}
 
 void rotateMouth(bool & ouvreLaBouche, Jeu & partieActuelle)
 {
@@ -644,26 +773,26 @@ bool peutAvancer(MinGL &window, Pacman & pacman, const Mur& mur)
     int murFaceHaut = min(mur.p1.y, mur.p2.y);
     int murFaceBas = max(mur.p1.y, mur.p2.y);
     if (pacman.direction == Droite) {
-        return !(droitePacman + 7 > murFaceGauche && droitePacman < murFaceDroite &&
+        return !(droitePacman + pacman.vitesse > murFaceGauche && droitePacman < murFaceDroite &&
                  hautPacman < murFaceBas && basPacman > murFaceHaut) &&
                 (int) (pacman.position.x + pacman.rayon) < window.getWindowSize().getX();
     }
     else if (pacman.direction == Gauche) {
-        if(pacman.position.y == 75) {
-            if(pacman.position.x < 0) pacman.position.x = 1280;
-            return true;
-        }
-        return !(gauchePacman - 7 < murFaceDroite && gauchePacman > murFaceGauche &&
+        //        if(pacman.position.y == 75) {
+        //            if(pacman.position.x < 0) pacman.position.x = 1280;
+        //            return true;
+        //        }
+        return !(gauchePacman - pacman.vitesse < murFaceDroite && gauchePacman > murFaceGauche &&
                  hautPacman < murFaceBas && basPacman > murFaceHaut &&
                  pacman.position.x > 0) && pacman.position.x - pacman.rayon > 0;
     }
     else if (pacman.direction == Haut) {
-        return !(hautPacman - 7 < murFaceBas && hautPacman > murFaceHaut &&
+        return !(hautPacman - pacman.vitesse < murFaceBas && hautPacman > murFaceHaut &&
                  gauchePacman < murFaceDroite && droitePacman > murFaceGauche &&
                  pacman.position.y > 0) && pacman.position.y - pacman.rayon > 0;
     }
     else if (pacman.direction == Bas) {
-        return !(basPacman + 7 > murFaceHaut && basPacman < murFaceBas &&
+        return !(basPacman + pacman.vitesse > murFaceHaut && basPacman < murFaceBas &&
                  gauchePacman < murFaceDroite && droitePacman > murFaceGauche) &&
                 (int) (pacman.position.y + pacman.rayon) < window.getWindowSize().getY();
     }
@@ -711,7 +840,6 @@ void avancer(MinGL &window, Jeu & partieActuelle) {
     default:
         break;
     }
-    mangePoint(partieActuelle);
 }
 
 void gestionEntreesClavier(MinGL &window, Jeu & partieActuelle){
@@ -914,7 +1042,7 @@ Direction trouverDirection(Fantome &fantome, Pacman pacman, std::vector<Mur> mur
     //    cout << "---------" << endl;
 
     if(!fantome.possedeTrajectoire) {
-        if((fantome.position.x - pacman.position.x < fantome.vitesse) && (fantome.position.x - pacman.position.x >= 0) && fantome.position.y != pacman.position.y) {
+        if((fantome.position.x - pacman.position.x < fantome.vitesse) && (fantome.position.x - pacman.position.x >= -fantome.vitesse) && fantome.position.y != pacman.position.y) {
             bool findWay = false;
             unsigned int compteur = 0;
 
@@ -938,7 +1066,7 @@ Direction trouverDirection(Fantome &fantome, Pacman pacman, std::vector<Mur> mur
 
                     clone.direction = distances[3].first;
                     if(peutAvancerFantome(window, clone, murs)) {
-                        cout << "issue vers la direction : " << distances[3].first << " trouvée à Gauche" << endl;
+                        //cout << "issue vers la direction : " << distances[3].first << " trouvée à Gauche" << endl;
                         directionsFantome.emplace_back(distances[3].first, fantome);
 
                         for(unsigned int i (0) ; i <= compteur*2 ; ++i) {
@@ -955,7 +1083,7 @@ Direction trouverDirection(Fantome &fantome, Pacman pacman, std::vector<Mur> mur
                     clone.direction = distances[3].first;
 
                     if(peutAvancerFantome(window, clone, murs)) {
-                        cout << "issue vers la direction : " << distances[3].first << " à Droite" << endl;
+                        // cout << "issue vers la direction : " << distances[3].first << " à Droite" << endl;
                         directionsFantome.emplace_back(distances[3].first, fantome);
 
                         for(unsigned int i (0) ; i <= (compteur-149)*2 ; ++i) {
@@ -978,12 +1106,12 @@ Direction trouverDirection(Fantome &fantome, Pacman pacman, std::vector<Mur> mur
             while(!findWay && compteur < 300) {
                 compteur += 1;
 
-                clone.direction = Direction::Gauche;
+                clone.direction = Direction::Haut;
                 if(!peutAvancerFantome(window, clone, murs)) {
                     compteur = 150;
                 }
 
-                clone.direction = Direction::Droite;
+                clone.direction = Direction::Bas;
                 if(!peutAvancerFantome(window, clone, murs)) {
                     if(compteur == 150) break;
                 }
@@ -995,7 +1123,7 @@ Direction trouverDirection(Fantome &fantome, Pacman pacman, std::vector<Mur> mur
                     clone.direction = distances[3].first;
 
                     if(peutAvancerFantome(window, clone, murs)) {
-                        cout << "issue vers la direction : " << distances[3].first << " trouvée En Haut" << endl;
+                        //cout << "issue vers la direction : " << distances[3].first << " trouvée En Haut" << endl;
                         directionsFantome.emplace_back(distances[3].first, fantome);
 
                         for(unsigned int i (0) ; i <= compteur*2 ; ++i) {
@@ -1010,7 +1138,7 @@ Direction trouverDirection(Fantome &fantome, Pacman pacman, std::vector<Mur> mur
                     clone.direction = distances[3].first;
 
                     if(peutAvancerFantome(window, clone, murs)) {
-                        cout << "issue vers la direction :  " << distances[3].first << " en Bas" << endl;
+                        //cout << "issue vers la direction :  " << distances[3].first << " en Bas" << endl;
                         directionsFantome.emplace_back(distances[3].first, fantome);
 
                         for(unsigned int i (0) ; i <= (compteur-149)*2 ; ++i) {
@@ -1078,21 +1206,17 @@ int main()
         // On efface la fenêtre
         window.clearScreen();
 
+        dessiner(window, partieActuelle);
+
         if(partieActuelle.etat == TypeEtat::Accueil) {
-            dessiner(window, partieActuelle);
             events(window, partieActuelle);
         }
         else if (partieActuelle.etat == TypeEtat::Parametre) {
-            dessiner(window, partieActuelle);
             events(window, partieActuelle);
 
         } else if (partieActuelle.etat == TypeEtat::Chargement) {
-            dessiner(window, partieActuelle);
-            this_thread::sleep_for(chrono::milliseconds(5000) - chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now() - start));
-
             partieActuelle = chargerLaPartie(3, partieActuelle.parametres);
 
-            //this_thread::sleep_for(chrono::milliseconds(3000) - chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now() - start));
         }
         else if (partieActuelle.etat == TypeEtat::EnCours) {
             // On affiche l'image
@@ -1103,54 +1227,60 @@ int main()
                 }
             }
 
-            // On dessine les formes géométriques
-            dessiner(window, partieActuelle);
-            rotateMouth(ouvreLaBouche, partieActuelle);
-            gestionEntreesClavier(window, partieActuelle);
-            avancer(window, partieActuelle);
+            if(partieActuelle.pacman.vivant) {
+                rotateMouth(ouvreLaBouche, partieActuelle);
+                gestionEntreesClavier(window, partieActuelle);
+                avancer(window, partieActuelle);
+                mangePoint(partieActuelle);
+
+                // On parcoure les trajectoires enregistrées
+                for(Fantome & fantome : partieActuelle.listeFantomes) {
+                    if(directionsFantome.empty()) break;
+
+                    // On parcoure nos fantômes
+                    if(!fantome.enQueue) { // Si le fantôme n'a pas encore avancé avec sa trajectoire enregistrée :
+                        pair<Direction, Fantome> trajectoire = directionsFantome.back(); // On récupère la dernière trajectoire
+                        if(trajectoire.second.id == fantome.id) { // Si la trajectoire est celle de notre fantôme
+
+                            directionsFantome.pop_back(); // On la retire de la liste
+                            fantome.direction = trajectoire.first; // On définit la direction de notre fantôme sur celle de la trajectoire
+
+                            avancerDansLaDirection(fantome, window, partieActuelle.listeObstacles); // On fait avancer le fantôme
+
+                            fantome.enQueue = true;
+                        }
+                    }
+                }
+
+
+                for(Fantome & fantome : partieActuelle.listeFantomes) {
+                    if(!fantome.enQueue) { // Si le fantôme n'a pas / plus de trajectoire enregistrée
+                        fantome.possedeTrajectoire = false;
+                        fantome.direction = trouverDirection(fantome, partieActuelle.pacman, partieActuelle.listeObstacles, window);
+
+                        avancerDansLaDirection(fantome, window, partieActuelle.listeObstacles);
+                    }
+                }
+            } else {
+                this_thread::sleep_for(chrono::milliseconds(50) - chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now() - start));
+            }
+
             events(window, partieActuelle);
 
             for(Fantome & fantome : partieActuelle.listeFantomes) {
                 fantome.enQueue = false;
             }
 
-            cout << directionsFantome.size() << endl;
-            // On parcoure les trajectoires enregistrées
-            for(Fantome & fantome : partieActuelle.listeFantomes) {
-                if(directionsFantome.empty()) break;
+            //cout << directionsFantome.size() << endl;
 
-                // On parcoure nos fantômes
-                if(!fantome.enQueue) {
-
-                    pair<Direction, Fantome> trajectoire = directionsFantome.back(); // On récupère la dernière trajectoire
-                    if(trajectoire.second.id == fantome.id) { // Si la trajectoire est celle de notre fantôme
-
-                        directionsFantome.pop_back(); // On la retire de la liste
-                        fantome.direction = trajectoire.first; // On définit la direction de notre fantôme sur celle de la trajectoire
-
-                        avancerDansLaDirection(fantome, window, partieActuelle.listeObstacles); // On fait avancer le fantôme
-
-                        fantome.enQueue = true;
-                    }
-                }
-            }
-
-
-            for(Fantome & fantome : partieActuelle.listeFantomes) {
-                if(!fantome.enQueue) {
-                    fantome.possedeTrajectoire = false;
-                    fantome.direction = trouverDirection(fantome, partieActuelle.pacman, partieActuelle.listeObstacles, window);
-
-                    avancerDansLaDirection(fantome, window, partieActuelle.listeObstacles);
-                }
-            }
         }
+
 
         window.finishFrame();
 
         // On vide la queue d'évènements
         if(partieActuelle.etat != TypeEtat::Accueil && partieActuelle.etat != TypeEtat::Parametre /*&& partieActuelle.etat != TypeEtat::EnCours*/) {
-            // window.getEventManager().clearEvents();
+            window.getEventManager().clearEvents();
         }
 
         // On attend un peu pour limiter le framerate et soulager le CPU
